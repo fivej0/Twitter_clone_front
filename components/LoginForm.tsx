@@ -3,11 +3,19 @@ import Link from "next/link";
 import { useState, useCallback } from "react";
 import styled from "styled-components";
 
+interface IProps {
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 const ButtonWrapper = styled.div`
   margin-top: 10px;
 `;
 
-const LoginForm = () => {
+const FormWrapper = styled(Form)`
+  padding: 10px;
+`;
+
+const LoginForm = ({ setIsLoggedIn }: IProps) => {
   const [id, setId] = useState("");
   const [passwrod, setPasswrod] = useState("");
 
@@ -16,11 +24,19 @@ const LoginForm = () => {
   }, []);
 
   const onChangePassword = useCallback((e: any) => {
-    setId(e.target.value);
+    setPasswrod(e.target.value);
   }, []);
 
+  const onSubmitFrom = useCallback(
+    (e: any) => {
+      console.log(id, passwrod);
+      setIsLoggedIn(true);
+    },
+    [id, passwrod, setIsLoggedIn]
+  );
+
   return (
-    <Form>
+    <FormWrapper onFinish={onSubmitFrom}>
       <div>
         <label htmlFor="user-id">아이디</label>
         <br />
@@ -49,7 +65,7 @@ const LoginForm = () => {
         </Button>
         <Link href={"/signup"}>회원가입</Link>
       </ButtonWrapper>
-    </Form>
+    </FormWrapper>
   );
 };
 

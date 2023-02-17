@@ -45,13 +45,19 @@ const AppLatout = ({ children }: any) => {
       <Menu mode="horizontal" items={items} />
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {isLoggedIn ? <UserProfile /> : <LoginForm />}
+          {isLoggedIn ? (
+            <UserProfile setIsLoggedIn={setIsLoggedIn} />
+          ) : (
+            <LoginForm setIsLoggedIn={setIsLoggedIn} />
+          )}
         </Col>
         <Col xs={24} md={12}>
           {children}
         </Col>
         <Col xs={24} md={6}>
-          오른쪽 메뉴
+          <a href="http://naver.com" target="_blank" rel="noreferrer noopener">
+            네이버
+          </a>
         </Col>
       </Row>
     </div>
