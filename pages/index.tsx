@@ -1,9 +1,13 @@
-import AppLatout from "../components/AppLayout";
+import Head from "next/head";
+
 const Home = () => {
   return (
-    <AppLatout>
+    <>
+      <Head>
+        <title>메인페이지 | Twitter</title>
+      </Head>
       <div>메인페이지</div>
-    </AppLatout>
+    </>
   );
 };
 
