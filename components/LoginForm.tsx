@@ -2,6 +2,7 @@ import { Button, Form, Input } from "antd";
 import Link from "next/link";
 import { useState, useCallback } from "react";
 import styled from "styled-components";
+import useInput from "../hooks/useInput";
 
 interface IProps {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,16 +17,8 @@ const FormWrapper = styled(Form)`
 `;
 
 const LoginForm = ({ setIsLoggedIn }: IProps) => {
-  const [id, setId] = useState("");
-  const [passwrod, setPasswrod] = useState("");
-
-  const onChangeId = useCallback((e: any) => {
-    setId(e.target.value);
-  }, []);
-
-  const onChangePassword = useCallback((e: any) => {
-    setPasswrod(e.target.value);
-  }, []);
+  const [id, onChangeId] = useInput("");
+  const [passwrod, onChangePassword] = useInput("");
 
   const onSubmitFrom = useCallback(
     (e: any) => {
