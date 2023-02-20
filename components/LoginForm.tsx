@@ -1,12 +1,10 @@
 import { Button, Form, Input } from "antd";
 import Link from "next/link";
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import useInput from "../hooks/useInput";
-
-interface IProps {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { loginAction } from "../reducers/user";
 
 const ButtonWrapper = styled.div`
   margin-top: 10px;
@@ -16,16 +14,16 @@ const FormWrapper = styled(Form)`
   padding: 10px;
 `;
 
-const LoginForm = ({ setIsLoggedIn }: IProps) => {
+const LoginForm = () => {
+  const dispatch = useDispatch();
   const [id, onChangeId] = useInput("");
   const [passwrod, onChangePassword] = useInput("");
 
   const onSubmitFrom = useCallback(
     (e: any) => {
-      console.log(id, passwrod);
-      setIsLoggedIn(true);
+      dispatch(loginAction({ id, passwrod }));
     },
-    [id, passwrod, setIsLoggedIn]
+    [dispatch, id, passwrod]
   );
 
   return (

@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import styled from "styled-components";
 import { Menu, Input, Row, Col, MenuProps } from "antd";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import UserProfile from "../components/UserProfile";
 import LoginForm from "../components/LoginForm";
@@ -38,18 +38,14 @@ const items: MenuProps["items"] = [
 ];
 
 const AppLatout = ({ children }: any) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useSelector((state: any) => state?.user.isLoggedIn);
 
   return (
     <div>
       <Menu mode="horizontal" items={items} />
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {isLoggedIn ? (
-            <UserProfile setIsLoggedIn={setIsLoggedIn} />
-          ) : (
-            <LoginForm setIsLoggedIn={setIsLoggedIn} />
-          )}
+          {isLoggedIn ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {children}
