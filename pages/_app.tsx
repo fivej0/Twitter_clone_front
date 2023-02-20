@@ -1,7 +1,8 @@
 import React from "react";
 import AppLatout from "../components/AppLayout";
+import wrapper from "../store/configureStore";
 
-const Twitter = ({ Component }) => {
+const Twitter = ({ Component }: any) => {
   return (
     <>
       <AppLatout>
@@ -10,4 +11,4 @@ const Twitter = ({ Component }) => {
     </>
   );
 };
-export default Twitter;
+export default wrapper.withRedux(Twitter);
